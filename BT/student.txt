@@ -1,0 +1,36 @@
+// SPDX-License-Identifier: MIT
+
+pragma solidity ^0.8.0;
+
+contract stud_prac3{
+
+    struct student{
+        uint id;
+        string fname;
+        string lname;
+        uint marks;
+    }
+
+    address owner;
+    uint stdCount = 0;
+    student [] stdRecords;
+
+    constructor(){
+        owner = msg.sender;
+    }
+
+    function addRecord(uint _id, string memory _fname, string memory _lname, uint _marks) public{
+        stdCount = stdCount + 1;
+        stdRecords.push(student(_id, _fname, _lname, _marks));
+    }
+
+    function getRecord() public view returns(student[] memory){
+        return stdRecords;
+    }
+
+    receive() external payable{
+        revert("This contract does not accept ether");
+    }
+
+
+}
